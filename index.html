@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Penjualan D'FRESTO</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 15px; background-color: #f4f4f4; }
+        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        h2 { text-align: center; color: #d32f2f; margin-bottom: 10px; }
+        .section-title { background: #d32f2f; color: white; padding: 5px 10px; border-radius: 4px; margin-top: 15px; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; }
+        .item-row select, .item-row input[type="number"], .item-row input[type="text"], .item-row input[type="date"] { padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        .item-row input[type="number"] { width: 60px; text-align: center; }
+        .summary-box { background: #ffebee; padding: 10px; border-radius: 4px; margin-top: 15px; }
+        .btn-wa { width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; }
+        .btn-wa:hover { background: #128C7E; }
+        .btn-reset { width: 100%; padding: 10px; background: #757575; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; }
+        .btn-reset:hover { background: #616161; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Laporan D'FRESTO</h2>
+    
+    <div class="item-row">
+        <label>Tanggal:</label>
+        <input type="date" id="tanggal" class="save-state">
+    </div>
+    <div class="item-row">
+        <label>Kasir/Shift:</label>
+        <input type="text" id="kasir" class="save-state" placeholder="Nama Kasir" style="width: 150px;">
+    </div>
+
+    <div class="section-title">1. ALA CARTE</div>
+    <div class="item-row">
+        <span>Sayap / Paha Bawah (8k)[span_0](start_span)[span_0](end_span)</span>
+        <input type="number" id="ac1" class="qty save-state" data-harga="8000" data-nama="Sayap/Paha Bawah (8k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <span>Dada / Paha Atas (10k)[span_1](start_span)[span_1](end_span)</span>
+        <input type="number" id="ac2" class="qty save-state" data-harga="10000" data-nama="Dada/Paha Atas (10k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <select id="ac3_v" class="variant save-state">
+            <option value="12000">Geprek (12k)[span_2](start_span)[span_2](end_span)</option>
+            <option value="14000">Geprek (14k)[span_3](start_span)[span_3](end_span)</option>
+        </select>
+        <input type="number" id="ac3_q" class="qty-var save-state" data-nama="Ayam Geprek" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <select id="ac4_v" class="variant save-state">
+            <option value="12000">Superhot (12k)[span_4](start_span)[span_4](end_span)</option>
+            <option value="14000">Superhot (14k)[span_5](start_span)[span_5](end_span)</option>
+        </select>
+        <input type="number" id="ac4_q" class="qty-var save-state" data-nama="Ayam Superhot" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <select id="ac5_v" class="variant save-state">
+            <option value="12000">Saus Keju (12k)[span_6](start_span)[span_6](end_span)</option>
+            <option value="14000">Saus Keju (14k)[span_7](start_span)[span_7](end_span)</option>
+        </select>
+        <input type="number" id="ac5_q" class="qty-var save-state" data-nama="Ayam Saus Keju" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <select id="ac6_v" class="variant save-state">
+            <option value="16000">Superhot + Keju (16k)[span_8](start_span)[span_8](end_span)</option>
+            <option value="18000">Superhot + Keju (18k)[span_9](start_span)[span_9](end_span)</option>
+        </select>
+        <input type="number" id="ac6_q" class="qty-var save-state" data-nama="Superhot + Keju" value="0" min="0">
+    </div>
+
+    <div class="section-title">2. PAKET NASI</div>
+    <div class="item-row">
+        <span>Pkt Sayap/P.Bawah (11k)[span_10](start_span)[span_10](end_span)</span>
+        <input type="number" id="pn1" class="qty save-state" data-harga="11000" data-nama="Paket Sayap/P.Bawah (11k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <span>Pkt Dada/P.Atas (13k)[span_11](start_span)[span_11](end_span)</span>
+        <input type="number" id="pn2" class="qty save-state" data-harga="13000" data-nama="Paket Dada/P.Atas (13k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <select id="pn3_v" class="variant save-state">
+            <option value="15000">Pkt Ayam + Saus (15k)[span_12](start_span)[span_12](end_span)</option>
+            <option value="16000">Pkt Ayam + Saus (16k)[span_13](start_span)[span_13](end_span)</option>
+        </select>
+        <input type="number" id="pn3_q" class="qty-var save-state" data-nama="Paket Ayam + Saus" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <select id="pn4_v" class="variant save-state">
+            <option value="17000">Pkt Superhot+Keju (17k)[span_14](start_span)[span_14](end_span)</option>
+            <option value="19000">Pkt Superhot+Keju (19k)[span_15](start_span)[span_15](end_span)</option>
+        </select>
+        <input type="number" id="pn4_q" class="qty-var save-state" data-nama="Paket Superhot+Keju" value="0" min="0">
+    </div>
+
+    <div class="section-title">3. ADD-ON</div>
+    <div class="item-row">
+        <span>Nasi (4k)[span_16](start_span)[span_16](end_span)</span>
+        <input type="number" id="ad1" class="qty save-state" data-harga="4000" data-nama="Nasi (4k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <span>Sambal Geprek (4k)[span_17](start_span)[span_17](end_span)</span>
+        <input type="number" id="ad2" class="qty save-state" data-harga="4000" data-nama="Sambal Geprek (4k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <span>Extra Superhot (4k)[span_18](start_span)[span_18](end_span)</span>
+        <input type="number" id="ad3" class="qty save-state" data-harga="4000" data-nama="Extra Superhot (4k)" value="0" min="0">
+    </div>
+    <div class="item-row">
+        <span>Extra Keju (4k)[span_19](start_span)[span_19](end_span)</span>
+        <input type="number" id="ad4" class="qty save-state" data-harga="4000" data-nama="Extra Keju (4k)" value="0" min="0">
+    </div>
+
+    <div class="section-title">KEUANGAN</div>
+    <div class="item-row">
+        <label>Pengeluaran Ops (Rp):</label>
+        <input type="number" id="pengeluaran" class="save-state" value="0" style="width: 100px;">
+    </div>
+    <div class="item-row">
+        <label>Non-Tunai / QRIS (Rp):</label>
+        <input type="number" id="qris" class="save-state" value="0" style="width: 100px;">
+    </div>
+
+    <div class="summary-box">
+        <div><strong>Total Omset:</strong> Rp <span id="total-omset">0</span></div>
+        <div><strong>Setoran Cash:</strong> Rp <span id="sisa-cash">0</span></div>
+    </div>
+
+    <button class="btn-wa" onclick="copyToWA()">Copy Laporan ke WA</button>
+    <button class="btn-reset" onclick="resetForm()">Reset Form (Hari Baru)</button>
+</div>
+
+<script>
+    // Set default tanggal hari ini
+    if (!localStorage.getItem('tanggal')) {
+        document.getElementById('tanggal').valueAsDate = new Date();
+    }
+
+    // Fungsi Hitung dan Simpan Ke LocalStorage
+    function hitungDanSimpan() {
+        let total = 0;
+        
+        // Simpan semua elemen bertanda class 'save-state' ke LocalStorage
+        document.querySelectorAll('.save-state').forEach(elem => {
+            localStorage.setItem(elem.id, elem.value);
+        });
+
+        // Hitung Item biasa
+        document.querySelectorAll('.qty').forEach(input => {
+            let qty = parseInt(input.value) || 0;
+            let harga = parseInt(input.getAttribute('data-harga'));
+            total += qty * harga;
+        });
+
+        // Hitung Item varian
+        document.querySelectorAll('.qty-var').forEach(input => {
+            let qty = parseInt(input.value) || 0;
+            let select = input.previousElementSibling;
+            let harga = parseInt(select.value);
+            total += qty * harga;
+        });
+
+        let pengeluaran = parseInt(document.getElementById('pengeluaran').value) || 0;
+        let qris = parseInt(document.getElementById('qris').value) || 0;
+        let cash = total - pengeluaran - qris;
+
+        document.getElementById('total-omset').innerText = total.toLocaleString('id-ID');
+        document.getElementById('sisa-cash').innerText = cash.toLocaleString('id-ID');
+    }
+
+    // Fungsi Load Data dari LocalStorage saat halaman dibuka
+    function loadData() {
+        document.querySelectorAll('.save-state').forEach(elem => {
+            let savedValue = localStorage.getItem(elem.id);
+            if (savedValue !== null) {
+                elem.value = savedValue;
+            }
+        });
+        hitungDanSimpan();
+    }
+
+    // Pasang Event Listener ke semua input/select
+    document.querySelectorAll('.save-state').forEach(element => {
+        element.addEventListener('input', hitungDanSimpan);
+        element.addEventListener('change', hitungDanSimpan);
+    });
+
+    // Reset Form untuk Hari Baru
+    function resetForm() {
+        if (confirm("Yakin ingin mengosongkan form untuk hari baru? Data lama di browser akan terhapus.")) {
+            localStorage.clear();
+            document.querySelectorAll('.save-state').forEach(elem => {
+                if (elem.type === 'number') elem.value = 0;
+                if (elem.type === 'text') elem.value = '';
+            });
+            document.getElementById('tanggal').valueAsDate = new Date();
+            hitungDanSimpan();
+        }
+    }
+
+    function copyToWA() {
+        let tgl = document.getElementById('tanggal').value;
+        let kasir = document.getElementById('kasir').value || '-';
+        
+        let teks = `*LAPORAN PENJUALAN HARIAN D'FRESTO*\nTanggal: ${tgl}\nKasir/Shift: ${kasir}\n\n`;
+
+        teks += `*DETAIL PENJUALAN:*\n`;
+        document.querySelectorAll('.qty').forEach(input => {
+            let qty = parseInt(input.value) || 0;
+            if(qty > 0) {
+                teks += `- ${input.getAttribute('data-nama')}: ${qty} porsi\n`;
+            }
+        });
+
+        document.querySelectorAll('.qty-var').forEach(input => {
+            let qty = parseInt(input.value) || 0;
+            if(qty > 0) {
+                let select = input.previousElementSibling;
+                let nama = input.getAttribute('data-nama');
+                let harga = select.value / 1000;
+                teks += `- ${nama} (${harga}k): ${qty} porsi\n`;
+            }
+        });
+
+        let pengeluaran = parseInt(document.getElementById('pengeluaran').value) || 0;
+        let qris = parseInt(document.getElementById('qris').value) || 0;
+        let total = document.getElementById('total-omset').innerText;
+        let cash = document.getElementById('sisa-cash').innerText;
+
+        teks += `\n*RINGKASAN KEUANGAN:*\n`;
+        teks += `- Total Omset: Rp ${total}\n`;
+        teks += `- Pengeluaran Ops: Rp ${pengeluaran.toLocaleString('id-ID')}\n`;
+        teks += `- Non-Tunai / QRIS: Rp ${qris.toLocaleString('id-ID')}\n`;
+        teks += `- Sisa Cash/Tunai: Rp ${cash}\n`;
+
+        navigator.clipboard.writeText(teks).then(() => {
+            alert('Laporan berhasil dicopy! Tinggal paste ke WhatsApp.');
+        });
+    }
+
+    // Jalankan load data saat pertama dibuka
+    loadData();
+</script>
+
+</body>
+</html>
