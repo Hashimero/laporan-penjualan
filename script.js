@@ -7,16 +7,10 @@ try {
     state = {};
 }
 
-// Inisialisasi Tanggal saat DOM siap
-document.addEventListener('DOMContentLoaded', () => {
-    const tglOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('tanggalHariIni').innerText = new Date().toLocaleDateString('id-ID', tglOptions);
-    renderMenu();
-});
-
 // Render UI
 function renderMenu() {
     const container = document.getElementById('menuContainer');
+    if (!container) return; // Safety check
     container.innerHTML = '';
     
     let currentCategory = '';
@@ -73,7 +67,11 @@ function calculateTotal() {
         const qty = state[item.id] || 0;
         total += qty * item.price;
     });
-    document.getElementById('totalOmset').innerText = 'Rp ' + total.toLocaleString('id-ID');
+    
+    const totalEl = document.getElementById('totalOmset');
+    if (totalEl) {
+        totalEl.innerText = 'Rp ' + total.toLocaleString('id-ID');
+    }
 }
 
 // Simpan ke Local Storage
@@ -122,7 +120,20 @@ function copyToWA() {
     text += `*TOTAL OMSET: Rp ${total.toLocaleString('id-ID')}*`;
 
     navigator.clipboard.writeText(text).then(() => {
-        alert('Mantap! Format WA udah disalin, tinggal paste aja b
-              ro.');
+        alert('Mantap! Format WA udah disalin, tinggal paste aja bro.');
+    }).catch(err => {
+        console.error('Gagal copy text: ', err);
+        alert('Gagal menyalin otomatis. Silakan coba lagi.');
     });
 }
+
+// --- INISIALISASI SAAT SCRIPT DIMUAT ---
+// Set tanggal
+const tglOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+const elemenTanggal = document.getElementById('tanggalHariIni');
+if (elemenTanggal) {
+    elemenTanggal.innerText = new Date().toLocaleDateString('id-ID', tglOptions);
+}
+
+// Jalankan render UI pertama kali
+renderMenu();
