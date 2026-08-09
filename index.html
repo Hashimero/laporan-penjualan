@@ -3,809 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Penjualan D'FRESTO</title>
+    <title>Kasir D'Fresto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { font-family: Arial, sans-serif; margin: 15px; background-color: #f4f4f4; }
-        .card { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
-        h2 { text-align: center; color: #d32f2f; margin-bottom: 10px; }
-        .section-title { background: #d32f2f; color: white; padding: 5px 10px; border-radius: 4px; margin-top: 15px; }
-        .item-row { display: flex; justify-content: space-between; align-items: center; margin: 8px 0; font-size: 14px; }
-        .item-row select, .item-row input[type="number"], .item-row input[type="text"], .item-row input[type="date"] { padding: 5px; border: 1px solid #ccc; border-radius: 4px; }
-        .item-row input[type="number"] { width: 60px; text-align: center; }
-        .summary-box { background: #ffebee; padding: 10px; border-radius: 4px; margin-top: 15px; }
-        .btn-wa { width: 100%; padding: 12px; background: #25D366; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 16px; margin-top: 15px; cursor: pointer; }
-        .btn-wa:hover { background: #128C7E; }
-        .btn-reset { width: 100%; padding: 10px; background: #757575; color: white; border: none; border-radius: 5px; font-weight: bold; font-size: 14px; margin-top: 10px; cursor: pointer; }
-        .btn-reset:hover { background: #616161; }
+        /* Sembunyikan scrollbar biar lebih clean di HP */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 text-gray-800 antialiased selection:bg-red-200">
 
-<div class="card">
-    <h2>Laporan D'FRESTO</h2>
+<div class="max-w-md mx-auto bg-white min-h-screen relative pb-32 shadow-xl">
     
-    <div class="item-row">
-        <label>Tanggal:</label>
-        <input type="date" id="tanggal" class="save-state">
-    </div>
-    <div class="item-row">
-        <label>Kasir/Shift:</label>
-        <input type="text" id="kasir" class="save-state" placeholder="Nama Kasir" style="width: 150px;">
-    </div>
-
-    <div class="section-title">1. ALA CARTE</div>
-    <div class="item-row">
-        <span>Sayap / Paha Bawah (8k)[span_0](start_span)[span_0](end_span)</span>
-        <input type="number" id="ac1" class="qty save-state" data-harga="8000" data-nama="Sayap/Paha Bawah (8k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <span>Dada / Paha Atas (10k)[span_1](start_span)[span_1](end_span)</span>
-        <input type="number" id="ac2" class="qty save-state" data-harga="10000" data-nama="Dada/Paha Atas (10k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <select id="ac3_v" class="variant save-state">
-            <option value="12000">Geprek (12k)[span_2](start_span)[span_2](end_span)</option>
-            <option value="14000">Geprek (14k)[span_3](start_span)[span_3](end_span)</option>
-        </select>
-        <input type="number" id="ac3_q" class="qty-var save-state" data-nama="Ayam Geprek" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <select id="ac4_v" class="variant save-state">
-            <option value="12000">Superhot (12k)[span_4](start_span)[span_4](end_span)</option>
-            <option value="14000">Superhot (14k)[span_5](start_span)[span_5](end_span)</option>
-        </select>
-        <input type="number" id="ac4_q" class="qty-var save-state" data-nama="Ayam Superhot" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <select id="ac5_v" class="variant save-state">
-            <option value="12000">Saus Keju (12k)[span_6](start_span)[span_6](end_span)</option>
-            <option value="14000">Saus Keju (14k)[span_7](start_span)[span_7](end_span)</option>
-        </select>
-        <input type="number" id="ac5_q" class="qty-var save-state" data-nama="Ayam Saus Keju" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <select id="ac6_v" class="variant save-state">
-            <option value="16000">Superhot + Keju (16k)[span_8](start_span)[span_8](end_span)</option>
-            <option value="18000">Superhot + Keju (18k)[span_9](start_span)[span_9](end_span)</option>
-        </select>
-        <input type="number" id="ac6_q" class="qty-var save-state" data-nama="Superhot + Keju" value="0" min="0">
-    </div>
-
-    <div class="section-title">2. PAKET NASI</div>
-    <div class="item-row">
-        <span>Pkt Sayap/P.Bawah (11k)[span_10](start_span)[span_10](end_span)</span>
-        <input type="number" id="pn1" class="qty save-state" data-harga="11000" data-nama="Paket Sayap/P.Bawah (11k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <span>Pkt Dada/P.Atas (13k)[span_11](start_span)[span_11](end_span)</span>
-        <input type="number" id="pn2" class="qty save-state" data-harga="13000" data-nama="Paket Dada/P.Atas (13k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <select id="pn3_v" class="variant save-state">
-            <option value="15000">Pkt Ayam + Saus (15k)[span_12](start_span)[span_12](end_span)</option>
-            <option value="16000">Pkt Ayam + Saus (16k)[span_13](start_span)[span_13](end_span)</option>
-        </select>
-        <input type="number" id="pn3_q" class="qty-var save-state" data-nama="Paket Ayam + Saus" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <select id="pn4_v" class="variant save-state">
-            <option value="17000">Pkt Superhot+Keju (17k)[span_14](start_span)[span_14](end_span)</option>
-            <option value="19000">Pkt Superhot+Keju (19k)[span_15](start_span)[span_15](end_span)</option>
-        </select>
-        <input type="number" id="pn4_q" class="qty-var save-state" data-nama="Paket Superhot+Keju" value="0" min="0">
-    </div>
-
-    <div class="section-title">3. ADD-ON</div>
-    <div class="item-row">
-        <span>Nasi (4k)[span_16](start_span)[span_16](end_span)</span>
-        <input type="number" id="ad1" class="qty save-state" data-harga="4000" data-nama="Nasi (4k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <span>Sambal Geprek (4k)[span_17](start_span)[span_17](end_span)</span>
-        <input type="number" id="ad2" class="qty save-state" data-harga="4000" data-nama="Sambal Geprek (4k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <span>Extra Superhot (4k)[span_18](start_span)[span_18](end_span)</span>
-        <input type="number" id="ad3" class="qty save-state" data-harga="4000" data-nama="Extra Superhot (4k)" value="0" min="0">
-    </div>
-    <div class="item-row">
-        <span>Extra Keju (4k)[span_19](start_span)[span_19](end_span)</span>
-        <input type="number" id="ad4" class="qty save-state" data-harga="4000" data-nama="Extra Keju (4k)" value="0" min="0">
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan Penjualan D'Fresto</title>
-    <style>
-        :root {
-            --primary: #E53935; /* D'Fresto Red */
-            --primary-dark: #C62828;
-            --surface: #ffffff;
-            --background: #f4f4f9;
-            --text-main: #333333;
-            --text-muted: #757575;
-            --border: #e0e0e0;
-            --radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--background);
-            color: var(--text-main);
-            display: flex;
-            justify-content: center;
-        }
-
-        #app-container {
-            width: 100%;
-            max-width: 480px;
-            min-height: 100vh;
-            background-color: var(--surface);
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* HEADER SEMANTIC */
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 20px 15px;
-            text-align: center;
-            border-bottom-left-radius: var(--radius);
-            border-bottom-right-radius: var(--radius);
-            box-shadow: 0 4px 6px rgba(229, 57, 53, 0.2);
-        }
-
-        header h1 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        /* DATE NAVIGATION */
-        nav.date-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255,255,255,0.15);
-            border-radius: 30px;
-            padding: 5px 15px;
-        }
-
-        nav.date-nav button {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0 10px;
-            transition: opacity 0.2s;
-        }
-
-        nav.date-nav button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        #currentDateDisplay {
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        /* MAIN CONTENT */
-        main {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            overflow-y: auto;
-        }
-
-        .empty-state {
-            text-align: center;
-            color: var(--text-muted);
-            margin: auto 0;
-            font-style: italic;
-            padding: 40px 20px;
-            background: var(--background);
-            border-radius: var(--radius);
-            border: 2px dashed var(--border);
-        }
-
-        .sales-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .sale-item {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 12px 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            background: var(--surface);
-        }
-
-        .sale-item-header {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 600;
-            color: var(--primary-dark);
-        }
-
-        .sale-item-details {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        .sale-item-price {
-            text-align: right;
-            font-weight: bold;
-            color: var(--text-main);
-            margin-top: 5px;
-        }
-
-        /* SUMMARY & BUTTONS */
-        section.summary {
-            background: #ffebee;
-            padding: 15px;
-            border-radius: var(--radius);
-            margin-top: auto;
-        }
-
-        section.summary h3 {
-            display: flex;
-            justify-content: space-between;
-            color: var(--primary-dark);
-            font-size: 1.1rem;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: var(--radius);
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .btn-success {
-            background-color: #2e7d32;
-            color: white;
-            margin-top: 5px;
-        }
-
-        /* MODAL DIALOG SEMANTIC */
-        dialog {
-            border: none;
-            border-radius: var(--radius);
-            padding: 20px;
-            width: 90%;
-            max-width: 400px;
-            margin: auto;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        dialog::backdrop {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
-        }
-
-        dialog h2 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-
-        form label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--text-main);
-        }
-
-        form select, form input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-
-        fieldset {
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 15px;
-            background: var(--background);
-        }
-
-        fieldset legend {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--primary);
-            padding: 0 5px;
-        }
-
-        .addon-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-        
-        .addon-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .addon-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9rem;
-        }
-
-        .addon-qty {
-            width: 60px !important;
-            margin-bottom: 0 !important;
-            padding: 5px !important;
-            text-align: center;
-            display: none;
-        }
-
-        .addon-qty.visible {
-            display: block;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .btn-cancel {
-            background: var(--border);
-            color: var(--text-main);
-        }
-    </style>
-</head>
-<body>
-
-<div id="app-container">
-    <header>
-        <h1>Laporan D'Fresto</h1>
-        <nav class="date-nav">
-            <button id="btnPrevDate" aria-label="Hari Sebelumnya">&lt;</button>
-            <span id="currentDateDisplay">Memuat...</span>
-            <button id="btnNextDate" aria-label="Hari Selanjutnya" disabled>&gt;</button>
-        </nav>
+    <!-- HEADER -->
+    <header class="sticky top-0 bg-white border-b border-gray-100 p-4 z-10 flex justify-between items-center shadow-sm">
+        <div>
+            <h1 class="text-xl font-extrabold text-red-600 tracking-tight">D'FRESTO</h1>
+            <p id="tanggalHariIni" class="text-xs text-gray-400 font-medium"></p>
+        </div>
+        <button onclick="resetData()" class="text-xs font-bold text-gray-400 hover:text-red-500 bg-gray-50 px-3 py-1.5 rounded-full transition-colors">
+            Reset Hari Ini
+        </button>
     </header>
 
-    <main>
-        <section id="emptyState" class="empty-state">
-            Tidak ada data untuk hari ini
-        </section>
-
-        <ul id="salesList" class="sales-list" style="display: none;">
-            <!-- Render List Penjualan via JS -->
-        </ul>
-
-        <section class="summary" id="summarySection" style="display: none;">
-            <h3>Total Omset: <span id="totalOmsetDisplay">Rp 0</span></h3>
-        </section>
-
-        <div style="margin-top: auto;">
-            <button class="btn btn-primary" id="btnOpenAddModal">+ Tambah Penjualan</button>
-            <button class="btn btn-success" id="btnCopyWA">Copy Format WA</button>
-        </div>
+    <!-- MENU LIST CONTAINER -->
+    <main class="p-4" id="menuContainer">
+        <!-- Render via JavaScript -->
     </main>
+
+    <!-- BOTTOM ACTION BAR -->
+    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-100 p-4 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] z-20">
+        <div class="flex justify-between items-center mb-3">
+            <span class="text-sm font-semibold text-gray-500">Total Omset:</span>
+            <span id="totalOmset" class="text-xl font-bold text-gray-900">Rp 0</span>
+        </div>
+        <button onclick="copyToWA()" class="w-full bg-red-600 hover:bg-red-700 active:scale-[0.98] text-white font-bold py-3.5 rounded-xl transition-all shadow-md shadow-red-200">
+            Copy ke WhatsApp
+        </button>
+    </div>
+
 </div>
 
-<!-- NATIVE HTML5 DIALOG -->
-<dialog id="modalAddSale">
-    <h2>Catat Penjualan</h2>
-    <form id="formSale">
-        
-        <label for="menuUtama">Menu Terjual:</label>
-        <select id="menuUtama" required>
-            <option value="" disabled selected>Pilih Menu...</option>
-            <optgroup label="Ala Carte">
-                <option value="8000">Sayap / Paha Bawah (Rp 8.000)</option>
-                <option value="10000">Dada / Paha Atas (Rp 10.000)</option>
-                <option value="12000">Ayam Geprek (Rp 12.000)</option>
-                <option value="14000">Ayam Geprek (Rp 14.000)</option>
-                <option value="12001">Ayam Superhot (Rp 12.000)</option> <!-- 12001 trick to diff name later -->
-                <option value="14001">Ayam Superhot (Rp 14.000)</option>
-                <option value="12002">Ayam Saus Keju (Rp 12.000)</option>
-                <option value="14002">Ayam Saus Keju (Rp 14.000)</option>
-                <option value="16000">Ayam Superhot + Keju (Rp 16.000)</option>
-                <option value="18000">Ayam Superhot + Keju (Rp 18.000)</option>
-            </optgroup>
-            <optgroup label="Paket Nasi">
-                <option value="11000">Paket Sayap / P.Bawah (Rp 11.000)</option>
-                <option value="13000">Paket Dada / P.Atas (Rp 13.000)</option>
-                <option value="15000">Paket Ayam + Saus (Rp 15.000)</option>
-                <option value="16001">Paket Ayam + Saus (Rp 16.000)</option>
-                <option value="17000">Paket Superhot + Keju (Rp 17.000)</option>
-                <option value="19000">Paket Superhot + Keju (Rp 19.000)</option>
-            </optgroup>
-        </select>
-
-        <fieldset>
-            <legend>Add-On (Tambahan):</legend>
-            <div class="addon-item">
-                <label class="addon-checkbox">
-                    <input type="checkbox" class="addon-check" data-name="Nasi" data-price="4000"> Nasi (Rp 4k)
-                </label>
-                <input type="number" class="addon-qty" min="1" value="1">
-            </div>
-            <div class="addon-item">
-                <label class="addon-checkbox">
-                    <input type="checkbox" class="addon-check" data-name="Sambal Geprek" data-price="4000"> Sambal Geprek (Rp 4k)
-                </label>
-                <input type="number" class="addon-qty" min="1" value="1">
-            </div>
-            <div class="addon-item">
-                <label class="addon-checkbox">
-                    <input type="checkbox" class="addon-check" data-name="Superhot" data-price="4000"> Superhot (Rp 4k)
-                </label>
-                <input type="number" class="addon-qty" min="1" value="1">
-            </div>
-            <div class="addon-item">
-                <label class="addon-checkbox">
-                    <input type="checkbox" class="addon-check" data-name="Keju" data-price="4000"> Keju (Rp 4k)
-                </label>
-                <input type="number" class="addon-qty" min="1" value="1">
-            </div>
-        </fieldset>
-
-        <label for="qtyAyam">Quantity Ayam / Menu Utama:</label>
-        <input type="number" id="qtyAyam" min="1" value="1" required>
-
-        <div class="form-actions">
-            <button type="button" class="btn btn-cancel" id="btnCancelSale">Batal</button>
-            <button type="submit" class="btn btn-primary">Simpan</button>
-        </div>
-    </form>
-</dialog>
-
 <script>
-    // --- STATE MANAGEMENT ---
-    let currentDate = new Date();
-    currentDate.setHours(0,0,0,0);
-    const todayDate = new Date(currentDate);
-    
-    // Format tanggal ISO string (YYYY-MM-DD) sbg key LocalStorage
-    function getFormatDate(date) {
-        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    // Data Menu D'Fresto - Dipisah semua sesuai instruksi
+    const menuData = [
+        // ALA CARTE
+        { id: 'ac_sayap', category: 'Ala Carte', name: 'Sayap', price: 8000 },
+        { id: 'ac_pahabawah', category: 'Ala Carte', name: 'Paha Bawah', price: 8000 },
+        { id: 'ac_dada', category: 'Ala Carte', name: 'Dada', price: 10000 },
+        { id: 'ac_pahaatas', category: 'Ala Carte', name: 'Paha Atas', price: 10000 },
+        { id: 'ac_geprek12', category: 'Ala Carte', name: 'Ayam Geprek (12k)', price: 12000 },
+        { id: 'ac_geprek14', category: 'Ala Carte', name: 'Ayam Geprek (14k)', price: 14000 },
+        { id: 'ac_superhot12', category: 'Ala Carte', name: 'Ayam Superhot (12k)', price: 12000 },
+        { id: 'ac_superhot14', category: 'Ala Carte', name: 'Ayam Superhot (14k)', price: 14000 },
+        { id: 'ac_keju12', category: 'Ala Carte', name: 'Ayam Saus Keju (12k)', price: 12000 },
+        { id: 'ac_keju14', category: 'Ala Carte', name: 'Ayam Saus Keju (14k)', price: 14000 },
+        { id: 'ac_superkeju16', category: 'Ala Carte', name: 'Superhot + Keju (16k)', price: 16000 },
+        { id: 'ac_superkeju18', category: 'Ala Carte', name: 'Superhot + Keju (18k)', price: 18000 },
+        
+        // PAKET NASI
+        { id: 'pn_sayap', category: 'Paket Nasi', name: 'Paket Sayap', price: 11000 },
+        { id: 'pn_pahabawah', category: 'Paket Nasi', name: 'Paket Paha Bawah', price: 11000 },
+        { id: 'pn_dada', category: 'Paket Nasi', name: 'Paket Dada', price: 13000 },
+        { id: 'pn_pahaatas', category: 'Paket Nasi', name: 'Paket Paha Atas', price: 13000 },
+        { id: 'pn_ayamsaus15', category: 'Paket Nasi', name: 'Pkt Ayam + Saus (15k)', price: 15000 },
+        { id: 'pn_ayamsaus16', category: 'Paket Nasi', name: 'Pkt Ayam + Saus (16k)', price: 16000 },
+        { id: 'pn_superkeju17', category: 'Paket Nasi', name: 'Pkt Superhot + Keju (17k)', price: 17000 },
+        { id: 'pn_superkeju19', category: 'Paket Nasi', name: 'Pkt Superhot + Keju (19k)', price: 19000 },
+
+        // ADD-ON
+        { id: 'add_nasi', category: 'Tambahan', name: 'Nasi', price: 4000 },
+        { id: 'add_sambal', category: 'Tambahan', name: 'Sambal Geprek', price: 4000 },
+        { id: 'add_superhot', category: 'Tambahan', name: 'Superhot', price: 4000 },
+        { id: 'add_keju', category: 'Tambahan', name: 'Keju', price: 4000 },
+    ];
+
+    // State untuk menyimpan quantity
+    let state = JSON.parse(localStorage.getItem('dfresto_state')) || {};
+
+    // Inisialisasi Tanggal
+    const tglOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('tanggalHariIni').innerText = new Date().toLocaleDateString('id-ID', tglOptions);
+
+    // Render UI
+    function renderMenu() {
+        const container = document.getElementById('menuContainer');
+        container.innerHTML = '';
+        
+        let currentCategory = '';
+
+        menuData.forEach(item => {
+            // Render Header Kategori
+            if (item.category !== currentCategory) {
+                const catHeader = document.createElement('h2');
+                catHeader.className = 'text-sm font-bold text-gray-400 mt-6 mb-2 tracking-wider uppercase';
+                catHeader.innerText = item.category;
+                container.appendChild(catHeader);
+                currentCategory = item.category;
+            }
+
+            const qty = state[item.id] || 0;
+
+            // Render Item Baris
+            const div = document.createElement('div');
+            div.className = 'flex justify-between items-center py-3 border-b border-gray-50';
+            div.innerHTML = `
+                <div class="flex-1 pr-4">
+                    <h3 class="text-sm font-bold text-gray-800 leading-tight">${item.name}</h3>
+                    <p class="text-xs text-gray-400 font-medium mt-0.5">Rp ${(item.price).toLocaleString('id-ID')}</p>
+                </div>
+                <div class="flex items-center gap-3 bg-gray-50 px-2 py-1.5 rounded-full border border-gray-100">
+                    <button onclick="updateQty('${item.id}', -1)" class="w-8 h-8 flex justify-center items-center bg-white text-gray-600 rounded-full shadow-sm active:bg-gray-100 transition-all font-bold text-lg leading-none select-none touch-manipulation pb-0.5">-</button>
+                    <span id="qty-${item.id}" class="w-5 text-center font-bold text-gray-800 text-sm">${qty}</span>
+                    <button onclick="updateQty('${item.id}', 1)" class="w-8 h-8 flex justify-center items-center bg-red-100 text-red-600 rounded-full shadow-sm active:bg-red-200 transition-all font-bold text-lg leading-none select-none touch-manipulation pb-0.5">+</button>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+
+        calculateTotal();
     }
 
-    function getDisplayDate(date) {
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        return date.toLocaleDateString('id-ID', options);
+    // Fungsi Update Quantity
+    function updateQty(id, change) {
+        let currentQty = state[id] || 0;
+        let newQty = currentQty + change;
+        
+        if (newQty < 0) newQty = 0;
+        state[id] = newQty;
+        
+        document.getElementById(`qty-${id}`).innerText = newQty;
+        saveState();
+        calculateTotal();
     }
 
-    let allSales = JSON.parse(localStorage.getItem('dfresto_transactions')) || {};
+    // Hitung Total Omset
+    function calculateTotal() {
+        let total = 0;
+        menuData.forEach(item => {
+            const qty = state[item.id] || 0;
+            total += qty * item.price;
+        });
+        document.getElementById('totalOmset').innerText = 'Rp ' + total.toLocaleString('id-ID');
+    }
 
-    // --- DOM ELEMENTS ---
-    const dateDisplay = document.getElementById('currentDateDisplay');
-    const btnPrev = document.getElementById('btnPrevDate');
-    const btnNext = document.getElementById('btnNextDate');
-    
-    const emptyState = document.getElementById('emptyState');
-    const salesList = document.getElementById('salesList');
-    const summarySection = document.getElementById('summarySection');
-    const totalOmsetDisplay = document.getElementById('totalOmsetDisplay');
+    // Simpan ke Local Storage
+    function saveState() {
+        localStorage.setItem('dfresto_state', JSON.stringify(state));
+    }
 
-    const modal = document.getElementById('modalAddSale');
-    const btnOpenAdd = document.getElementById('btnOpenAddModal');
-    const btnCancel = document.getElementById('btnCancelSale');
-    const formSale = document.getElementById('formSale');
-
-    // --- RENDER LOGIC ---
-    function renderApp() {
-        const dateKey = getFormatDate(currentDate);
-        dateDisplay.innerText = getDisplayDate(currentDate);
-        
-        // Navigasi Date Button Logic
-        btnNext.disabled = currentDate.getTime() >= todayDate.getTime();
-
-        const dailyData = allSales[dateKey] || [];
-        
-        if (dailyData.length === 0) {
-            emptyState.style.display = 'block';
-            salesList.style.display = 'none';
-            summarySection.style.display = 'none';
-        } else {
-            emptyState.style.display = 'none';
-            salesList.style.display = 'flex';
-            summarySection.style.display = 'block';
-            
-            salesList.innerHTML = '';
-            let totalHariIni = 0;
-
-            dailyData.forEach((item, index) => {
-                let li = document.createElement('li');
-                li.className = 'sale-item';
-                
-                let addonHtml = '';
-                if(item.addons.length > 0) {
-                    addonHtml = `<div class="sale-item-details">+ ${item.addons.map(a => `${a.qty} ${a.name}`).join(', ')}</div>`;
-                }
-
-                li.innerHTML = `
-                    <div class="sale-item-header">
-                        <span>${item.qtyMain}x ${item.menuName}</span>
-                    </div>
-                    ${addonHtml}
-                    <div class="sale-item-price">Rp ${item.totalAmount.toLocaleString('id-ID')}</div>
-                `;
-                salesList.appendChild(li);
-                totalHariIni += item.totalAmount;
-            });
-
-            totalOmsetDisplay.innerText = `Rp ${totalHariIni.toLocaleString('id-ID')}`;
+    // Reset Data Harian
+    function resetData() {
+        if (confirm('Yakin mau reset semua angka jadi 0 buat shift baru?')) {
+            state = {};
+            saveState();
+            renderMenu();
         }
     }
 
-    // --- NAVIGATION EVENTS ---
-    btnPrev.addEventListener('click', () => {
-        currentDate.setDate(currentDate.getDate() - 1);
-        renderApp();
-    });
+    // Copy ke WhatsApp
+    function copyToWA() {
+        let dateStr = document.getElementById('tanggalHariIni').innerText;
+        let text = `*LAPORAN D'FRESTO*\nTanggal: ${dateStr}\n\n`;
+        let hasData = false;
+        let total = 0;
+        let currentCategory = '';
 
-    btnNext.addEventListener('click', () => {
-        currentDate.setDate(currentDate.getDate() + 1);
-        renderApp();
-    });
-
-    // --- MODAL & FORM EVENTS ---
-    btnOpenAdd.addEventListener('click', () => {
-        formSale.reset();
-        document.querySelectorAll('.addon-qty').forEach(input => input.classList.remove('visible'));
-        modal.showModal();
-    });
-
-    btnCancel.addEventListener('click', () => {
-        modal.close();
-    });
-
-    // Munculkan input qty independen jika add-on dicentang
-    document.querySelectorAll('.addon-check').forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            const qtyInput = this.parentElement.nextElementSibling;
-            if (this.checked) {
-                qtyInput.classList.add('visible');
-                qtyInput.value = 1;
-            } else {
-                qtyInput.classList.remove('visible');
-            }
-        });
-    });
-
-    // Menyimpan form penjualan
-    formSale.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const menuSelectEl = document.getElementById('menuUtama');
-        const selectedOption = menuSelectEl.options[menuSelectEl.selectedIndex];
-        
-        let menuName = selectedOption.text;
-        // Clean text (remove the "(Rp 12.000)" part)
-        menuName = menuName.split(' (')[0];
-        
-        // Handling the price hack value
-        let menuPriceStr = selectedOption.value;
-        let menuPrice = parseInt(menuPriceStr.slice(0, 5)); // get the real base price if it has trailing id
-        
-        const qtyMain = parseInt(document.getElementById('qtyAyam').value);
-        let totalAmount = (menuPrice * qtyMain);
-
-        const activeAddons = [];
-        document.querySelectorAll('.addon-check').forEach(checkbox => {
-            if (checkbox.checked) {
-                const aName = checkbox.getAttribute('data-name');
-                const aPrice = parseInt(checkbox.getAttribute('data-price'));
-                const aQty = parseInt(checkbox.parentElement.nextElementSibling.value);
+        menuData.forEach(item => {
+            const qty = state[item.id] || 0;
+            if (qty > 0) {
+                hasData = true;
                 
-                activeAddons.push({ name: aName, price: aPrice, qty: aQty });
-                totalAmount += (aPrice * aQty);
+                // Print Kategori jika belum diprint
+                if (item.category !== currentCategory) {
+                    text += `\n*${item.category.toUpperCase()}*\n`;
+                    currentCategory = item.category;
+                }
+
+                text += `- ${item.name} x${qty} = ${(item.price * qty / 1000)}k\n`;
+                total += (qty * item.price);
             }
         });
 
-        const newTransaction = {
-            id: Date.now(),
-            menuName: menuName,
-            menuPrice: menuPrice,
-            qtyMain: qtyMain,
-            addons: activeAddons,
-            totalAmount: totalAmount
-        };
-
-        const dateKey = getFormatDate(currentDate);
-        if (!allSales[dateKey]) allSales[dateKey] = [];
-        allSales[dateKey].push(newTransaction);
-        
-        localStorage.setItem('dfresto_transactions', JSON.stringify(allSales));
-        
-        modal.close();
-        renderApp();
-    });
-
-    // --- COPY TO WA EVENT ---
-    document.getElementById('btnCopyWA').addEventListener('click', () => {
-        const dateKey = getFormatDate(currentDate);
-        const dailyData = allSales[dateKey] || [];
-        
-        if(dailyData.length === 0) {
-            alert('Tidak ada data untuk dicopy hari ini.');
+        if (!hasData) {
+            alert('Laporan masih kosong cuy, isi dulu angkanya.');
             return;
         }
 
-        // Aggregate Data biar rapi di WA
-        let reportItem = {};
-        let reportAddon = {};
-        let grandTotal = 0;
+        text += `\n------------------\n`;
+        text += `*TOTAL OMSET: Rp ${total.toLocaleString('id-ID')}*`;
 
-        dailyData.forEach(tx => {
-            // Aggregate Main Menu
-            if(reportItem[tx.menuName]) {
-                reportItem[tx.menuName] += tx.qtyMain;
-            } else {
-                reportItem[tx.menuName] = tx.qtyMain;
-            }
-            
-            // Aggregate Addon
-            tx.addons.forEach(a => {
-                if(reportAddon[a.name]) {
-                    reportAddon[a.name] += a.qty;
-                } else {
-                    reportAddon[a.name] = a.qty;
-                }
-            });
-
-            grandTotal += tx.totalAmount;
-        });
-
-        let waText = `*LAPORAN PENJUALAN D'FRESTO*\nTanggal: ${getDisplayDate(currentDate)}\n\n`;
-        
-        waText += `*MENU UTAMA TERJUAL:*\n`;
-        for (const [nama, qty] of Object.entries(reportItem)) {
-            waText += `- ${nama}: ${qty} porsi\n`;
-        }
-
-        if (Object.keys(reportAddon).length > 0) {
-            waText += `\n*ADD-ON / TAMBAHAN:*\n`;
-            for (const [nama, qty] of Object.entries(reportAddon)) {
-                waText += `- ${nama}: ${qty} porsi\n`;
-            }
-        }
-
-        waText += `\n-----------------------\n`;
-        waText += `*TOTAL OMSET: Rp ${grandTotal.toLocaleString('id-ID')}*`;
-
-        navigator.clipboard.writeText(waText).then(() => {
-            alert('Format laporan berhasil dicopy! Silakan paste di grup WhatsApp.');
-        });
-    });
-
-    // Inisialisasi awal saat halaman dibuka
-    renderApp();
-</script>
-
-</body>
-</html>
-
-    </div>
-
-    <div class="section-title">KEUANGAN</div>
-    <div class="item-row">
-        <label>Pengeluaran Ops (Rp):</label>
-        <input type="number" id="pengeluaran" class="save-state" value="0" style="width: 100px;">
-    </div>
-    <div class="item-row">
-        <label>Non-Tunai / QRIS (Rp):</label>
-        <input type="number" id="qris" class="save-state" value="0" style="width: 100px;">
-    </div>
-
-    <div class="summary-box">
-        <div><strong>Total Omset:</strong> Rp <span id="total-omset">0</span></div>
-        <div><strong>Setoran Cash:</strong> Rp <span id="sisa-cash">0</span></div>
-    </div>
-
-    <button class="btn-wa" onclick="copyToWA()">Copy Laporan ke WA</button>
-    <button class="btn-reset" onclick="resetForm()">Reset Form (Hari Baru)</button>
-</div>
-
-<script>
-    // Set default tanggal hari ini
-    if (!localStorage.getItem('tanggal')) {
-        document.getElementById('tanggal').valueAsDate = new Date();
-    }
-
-    // Fungsi Hitung dan Simpan Ke LocalStorage
-    function hitungDanSimpan() {
-        let total = 0;
-        
-        // Simpan semua elemen bertanda class 'save-state' ke LocalStorage
-        document.querySelectorAll('.save-state').forEach(elem => {
-            localStorage.setItem(elem.id, elem.value);
-        });
-
-        // Hitung Item biasa
-        document.querySelectorAll('.qty').forEach(input => {
-            let qty = parseInt(input.value) || 0;
-            let harga = parseInt(input.getAttribute('data-harga'));
-            total += qty * harga;
-        });
-
-        // Hitung Item varian
-        document.querySelectorAll('.qty-var').forEach(input => {
-            let qty = parseInt(input.value) || 0;
-            let select = input.previousElementSibling;
-            let harga = parseInt(select.value);
-            total += qty * harga;
-        });
-
-        let pengeluaran = parseInt(document.getElementById('pengeluaran').value) || 0;
-        let qris = parseInt(document.getElementById('qris').value) || 0;
-        let cash = total - pengeluaran - qris;
-
-        document.getElementById('total-omset').innerText = total.toLocaleString('id-ID');
-        document.getElementById('sisa-cash').innerText = cash.toLocaleString('id-ID');
-    }
-
-    // Fungsi Load Data dari LocalStorage saat halaman dibuka
-    function loadData() {
-        document.querySelectorAll('.save-state').forEach(elem => {
-            let savedValue = localStorage.getItem(elem.id);
-            if (savedValue !== null) {
-                elem.value = savedValue;
-            }
-        });
-        hitungDanSimpan();
-    }
-
-    // Pasang Event Listener ke semua input/select
-    document.querySelectorAll('.save-state').forEach(element => {
- += `- Pengeluaran Ops: Rp ${pengeluaran.toLocaleString('id-ID')}\n`;
-        teks += `- Non-Tunai / QRIS: Rp ${qris.toLocaleString('id-ID')}\n`;
-        teks += `- Sisa Cash/Tunai: Rp ${cash}\n`;
-
-        navigator.clipboard.writeText(teks).then(() => {
-            alert('Laporan berhasil dicopy! Tinggal paste ke WhatsApp.');
+        navigator.clipboard.writeText(text).then(() => {
+            alert('Mantap! Format WA udah disalin, tinggal paste aja bro.');
         });
     }
 
-    // Jalankan load data saat pertama dibuka
-    loadData();
+    // Jalankan pertama kali
+    renderMenu();
 </script>
 
 </body>
