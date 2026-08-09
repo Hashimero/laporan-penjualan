@@ -44,55 +44,59 @@
 </div>
 
 <script>
-    // Data Menu D'Fresto - Dipisah semua sesuai instruksi
+
+    // Data Menu D'Fresto - Dikelompokkan Per Varian Rasa
     const menuData = [
-        // ALA CARTE
-        { id: 'ac_sayap', category: 'Ala Carte', name: 'Sayap', price: 8000 },
-        { id: 'ac_pahabawah', category: 'Ala Carte', name: 'Paha Bawah', price: 8000 },
-        { id: 'ac_dada', category: 'Ala Carte', name: 'Dada', price: 10000 },
-        { id: 'ac_pahaatas', category: 'Ala Carte', name: 'Paha Atas', price: 10000 },
-        
-        // Geprek
-        { id: 'ac_geprek_sayap', category: 'Ala Carte', name: 'Geprek Sayap', price: 12000 },
-        { id: 'ac_geprek_pahabawah', category: 'Ala Carte', name: 'Geprek Paha Bawah', price: 12000 },
-        { id: 'ac_geprek_dada', category: 'Ala Carte', name: 'Geprek Dada', price: 14000 },
-        { id: 'ac_geprek_pahaatas', category: 'Ala Carte', name: 'Geprek Paha Atas', price: 14000 },
-        
-        // Superhot
-        { id: 'ac_superhot_sayap', category: 'Ala Carte', name: 'Superhot Sayap', price: 12000 },
-        { id: 'ac_superhot_pahabawah', category: 'Ala Carte', name: 'Superhot Paha Bawah', price: 12000 },
-        { id: 'ac_superhot_dada', category: 'Ala Carte', name: 'Superhot Dada', price: 14000 },
-        { id: 'ac_superhot_pahaatas', category: 'Ala Carte', name: 'Superhot Paha Atas', price: 14000 },
-        
-        // Saus Keju
-        { id: 'ac_keju_sayap', category: 'Ala Carte', name: 'Saus Keju Sayap', price: 12000 },
-        { id: 'ac_keju_pahabawah', category: 'Ala Carte', name: 'Saus Keju Paha Bawah', price: 12000 },
-        { id: 'ac_keju_dada', category: 'Ala Carte', name: 'Saus Keju Dada', price: 14000 },
-        { id: 'ac_keju_pahaatas', category: 'Ala Carte', name: 'Saus Keju Paha Atas', price: 14000 },
-        
-        // Superhot + Keju
-        { id: 'ac_superkeju_sayap', category: 'Ala Carte', name: 'Superhot + Keju Sayap', price: 16000 },
-        { id: 'ac_superkeju_pahabawah', category: 'Ala Carte', name: 'Superhot + Keju Paha Bawah', price: 16000 },
-        { id: 'ac_superkeju_dada', category: 'Ala Carte', name: 'Superhot + Keju Dada', price: 18000 },
-        { id: 'ac_superkeju_pahaatas', category: 'Ala Carte', name: 'Superhot + Keju Paha Atas', price: 18000 },
-        
-        // PAKET NASI
-        { id: 'pn_sayap', category: 'Paket Nasi', name: 'Paket Sayap', price: 11000 },
-        { id: 'pn_pahabawah', category: 'Paket Nasi', name: 'Paket Paha Bawah', price: 11000 },
-        { id: 'pn_dada', category: 'Paket Nasi', name: 'Paket Dada', price: 13000 },
-        { id: 'pn_pahaatas', category: 'Paket Nasi', name: 'Paket Paha Atas', price: 13000 },
-        
-        // Paket Ayam Saus
-        { id: 'pn_ayamsaus_sayap', category: 'Paket Nasi', name: 'Pkt Ayam Saus Sayap', price: 15000 },
-        { id: 'pn_ayamsaus_pahabawah', category: 'Paket Nasi', name: 'Pkt Ayam Saus Paha Bawah', price: 15000 },
-        { id: 'pn_ayamsaus_dada', category: 'Paket Nasi', name: 'Pkt Ayam Saus Dada', price: 16000 },
-        { id: 'pn_ayamsaus_pahaatas', category: 'Paket Nasi', name: 'Pkt Ayam Saus Paha Atas', price: 16000 },
-        
-        // Paket Superhot + Keju
-        { id: 'pn_superkeju_sayap', category: 'Paket Nasi', name: 'Pkt Superhot + Keju Sayap', price: 17000 },
-        { id: 'pn_superkeju_pahabawah', category: 'Paket Nasi', name: 'Pkt Superhot + Keju Paha Bawah', price: 17000 },
-        { id: 'pn_superkeju_dada', category: 'Paket Nasi', name: 'Pkt Superhot + Keju Dada', price: 19000 },
-        { id: 'pn_superkeju_pahaatas', category: 'Paket Nasi', name: 'Pkt Superhot + Keju Paha Atas', price: 19000 },
+        // CRISPY BIASA
+        { id: 'ac_sayap', category: 'Ayam Crispy (Ala Carte)', name: 'Sayap', price: 8000 },
+        { id: 'ac_pahabawah', category: 'Ayam Crispy (Ala Carte)', name: 'Paha Bawah', price: 8000 },
+        { id: 'ac_dada', category: 'Ayam Crispy (Ala Carte)', name: 'Dada', price: 10000 },
+        { id: 'ac_pahaatas', category: 'Ayam Crispy (Ala Carte)', name: 'Paha Atas', price: 10000 },
+
+        { id: 'pn_sayap', category: 'Paket Nasi Biasa', name: 'Paket Sayap + Nasi', price: 11000 },
+        { id: 'pn_pahabawah', category: 'Paket Nasi Biasa', name: 'Paket Paha Bawah + Nasi', price: 11000 },
+        { id: 'pn_dada', category: 'Paket Nasi Biasa', name: 'Paket Dada + Nasi', price: 13000 },
+        { id: 'pn_pahaatas', category: 'Paket Nasi Biasa', name: 'Paket Paha Atas + Nasi', price: 13000 },
+
+        // MENU GEPREK
+        { id: 'ac_geprek_sayap', category: 'Menu Geprek', name: 'Geprek Sayap', price: 12000 },
+        { id: 'ac_geprek_pahabawah', category: 'Menu Geprek', name: 'Geprek Paha Bawah', price: 12000 },
+        { id: 'ac_geprek_dada', category: 'Menu Geprek', name: 'Geprek Dada', price: 14000 },
+        { id: 'ac_geprek_pahaatas', category: 'Menu Geprek', name: 'Geprek Paha Atas', price: 14000 },
+        { id: 'pn_geprek_sayap', category: 'Menu Geprek', name: 'Paket Geprek Sayap + Nasi', price: 15000 },
+        { id: 'pn_geprek_pahabawah', category: 'Menu Geprek', name: 'Paket Geprek Paha Bawah + Nasi', price: 15000 },
+        { id: 'pn_geprek_dada', category: 'Menu Geprek', name: 'Paket Geprek Dada + Nasi', price: 16000 },
+        { id: 'pn_geprek_pahaatas', category: 'Menu Geprek', name: 'Paket Geprek Paha Atas + Nasi', price: 16000 },
+
+        // MENU SUPERHOT
+        { id: 'ac_superhot_sayap', category: 'Menu Superhot', name: 'Superhot Sayap', price: 12000 },
+        { id: 'ac_superhot_pahabawah', category: 'Menu Superhot', name: 'Superhot Paha Bawah', price: 12000 },
+        { id: 'ac_superhot_dada', category: 'Menu Superhot', name: 'Superhot Dada', price: 14000 },
+        { id: 'ac_superhot_pahaatas', category: 'Menu Superhot', name: 'Superhot Paha Atas', price: 14000 },
+        { id: 'pn_superhot_sayap', category: 'Menu Superhot', name: 'Paket Superhot Sayap + Nasi', price: 15000 },
+        { id: 'pn_superhot_pahabawah', category: 'Menu Superhot', name: 'Paket Superhot Paha Bawah + Nasi', price: 15000 },
+        { id: 'pn_superhot_dada', category: 'Menu Superhot', name: 'Paket Superhot Dada + Nasi', price: 16000 },
+        { id: 'pn_superhot_pahaatas', category: 'Menu Superhot', name: 'Paket Superhot Paha Atas + Nasi', price: 16000 },
+
+        // MENU SAUS KEJU
+        { id: 'ac_keju_sayap', category: 'Menu Saus Keju', name: 'Saus Keju Sayap', price: 12000 },
+        { id: 'ac_keju_pahabawah', category: 'Menu Saus Keju', name: 'Saus Keju Paha Bawah', price: 12000 },
+        { id: 'ac_keju_dada', category: 'Menu Saus Keju', name: 'Saus Keju Dada', price: 14000 },
+        { id: 'ac_keju_pahaatas', category: 'Menu Saus Keju', name: 'Saus Keju Paha Atas', price: 14000 },
+        { id: 'pn_keju_sayap', category: 'Menu Saus Keju', name: 'Paket Saus Keju Sayap + Nasi', price: 15000 },
+        { id: 'pn_keju_pahabawah', category: 'Menu Saus Keju', name: 'Paket Saus Keju Paha Bawah + Nasi', price: 15000 },
+        { id: 'pn_keju_dada', category: 'Menu Saus Keju', name: 'Paket Saus Keju Dada + Nasi', price: 16000 },
+        { id: 'pn_keju_pahaatas', category: 'Menu Saus Keju', name: 'Paket Saus Keju Paha Atas + Nasi', price: 16000 },
+
+        // MENU MIX (SUPERHOT + KEJU)
+        { id: 'ac_mix_sayap', category: 'Menu Mix (Superhot + Keju)', name: 'Superhot + Keju Sayap', price: 16000 },
+        { id: 'ac_mix_pahabawah', category: 'Menu Mix (Superhot + Keju)', name: 'Superhot + Keju Paha Bawah', price: 16000 },
+        { id: 'ac_mix_dada', category: 'Menu Mix (Superhot + Keju)', name: 'Superhot + Keju Dada', price: 18000 },
+        { id: 'ac_mix_pahaatas', category: 'Menu Mix (Superhot + Keju)', name: 'Superhot + Keju Paha Atas', price: 18000 },
+        { id: 'pn_mix_sayap', category: 'Menu Mix (Superhot + Keju)', name: 'Paket Superhot + Keju Sayap + Nasi', price: 17000 },
+        { id: 'pn_mix_pahabawah', category: 'Menu Mix (Superhot + Keju)', name: 'Paket Superhot + Keju Paha Bawah + Nasi', price: 17000 },
+        { id: 'pn_mix_dada', category: 'Menu Mix (Superhot + Keju)', name: 'Paket Superhot + Keju Dada + Nasi', price: 19000 },
+        { id: 'pn_mix_pahaatas', category: 'Menu Mix (Superhot + Keju)', name: 'Paket Superhot + Keju Paha Atas + Nasi', price: 19000 },
 
         // ADD-ON
         { id: 'add_nasi', category: 'Tambahan', name: 'Nasi', price: 4000 },
@@ -100,7 +104,7 @@
         { id: 'add_superhot', category: 'Tambahan', name: 'Superhot', price: 4000 },
         { id: 'add_keju', category: 'Tambahan', name: 'Keju', price: 4000 },
     ];
-
+    
     // State untuk menyimpan quantity
     let state = JSON.parse(localStorage.getItem('dfresto_state')) || {};
 
@@ -116,10 +120,10 @@
         let currentCategory = '';
 
         menuData.forEach(item => {
-            // Render Header Kategori
+            // Render Header Kategori dengan gaya baru yang dipertegas
             if (item.category !== currentCategory) {
                 const catHeader = document.createElement('h2');
-                catHeader.className = 'text-sm font-bold text-gray-400 mt-6 mb-2 tracking-wider uppercase';
+                catHeader.className = 'text-xs font-black text-red-700 bg-red-50 border-l-4 border-red-600 px-3 py-2 mt-6 mb-3 tracking-wider uppercase rounded-r-md shadow-sm';
                 catHeader.innerText = item.category;
                 container.appendChild(catHeader);
                 currentCategory = item.category;
@@ -129,11 +133,11 @@
 
             // Render Item Baris
             const div = document.createElement('div');
-            div.className = 'flex justify-between items-center py-3 border-b border-gray-50';
+            div.className = 'flex justify-between items-center py-3 border-b border-gray-100';
             div.innerHTML = `
                 <div class="flex-1 pr-4">
                     <h3 class="text-sm font-bold text-gray-800 leading-tight">${item.name}</h3>
-                    <p class="text-xs text-gray-400 font-medium mt-0.5">Rp ${(item.price).toLocaleString('id-ID')}</p>
+                    <p class="text-xs text-gray-500 font-medium mt-0.5">Rp ${(item.price).toLocaleString('id-ID')}</p>
                 </div>
                 <div class="flex items-center gap-3 bg-gray-50 px-2 py-1.5 rounded-full border border-gray-100">
                     <button onclick="updateQty('${item.id}', -1)" class="w-8 h-8 flex justify-center items-center bg-white text-gray-600 rounded-full shadow-sm active:bg-gray-100 transition-all font-bold text-lg leading-none select-none touch-manipulation pb-0.5">-</button>
