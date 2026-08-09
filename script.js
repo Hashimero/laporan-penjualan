@@ -1,5 +1,11 @@
 // State untuk menyimpan quantity
-let state = JSON.parse(localStorage.getItem('dfresto_state')) || {};
+let state = {};
+try {
+    state = JSON.parse(localStorage.getItem('dfresto_state')) || {};
+} catch (e) {
+    console.error("Gagal membaca localStorage, mereset state:", e);
+    state = {};
+}
 
 // Inisialisasi Tanggal saat DOM siap
 document.addEventListener('DOMContentLoaded', () => {
