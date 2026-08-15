@@ -52,8 +52,8 @@ const menuData = [
 
     // ADD-ON
     { id: 'add_nasi', category: 'Tambahan', name: 'Nasi', price: 4000 },
-    { id: 'add_sambal', category: 'Tambahan', name: 'Sambal Geprek', price: 2000 },
-    { id: 'add_superhot', category: 'Tambahan', name: 'Superhot', price: 2000 },
+    { id: 'add_sambal', category: 'Tambahan', name: 'Sambal Geprek', price: 4000 },
+    { id: 'add_superhot', category: 'Tambahan', name: 'Superhot', price: 4000 },
     { id: 'add_keju', category: 'Tambahan', name: 'Keju', price: 4000 
     },
 ];
